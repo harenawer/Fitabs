@@ -21,7 +21,7 @@ def main(args=None):
                       default=False)
     (options, args) = parser.parse_args(args)
 
-    if len(args) == 0:
+    if not args:
         print "ERROR: one argument required"
         parser.print_help()
         return 1
@@ -33,8 +33,8 @@ def main(args=None):
     hdulist = pyfits.HDUList([phdu])
     try:
         hdulist.writeto(options.output, clobber=options.clobber)
-    except IOError, e:
-        print "ERROR:", e
+    except IOError, err:
+        print "ERROR:", err
         return 1
     return 0
 
